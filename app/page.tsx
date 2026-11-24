@@ -2,65 +2,28 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="mx-auto max-w-5xl">
-      {/* Hero Section */}
-      <section className="mb-12 overflow-hidden rounded-2xl bg-gradient-to-r from-blue-800 via-blue-600 to-sky-500 px-6 py-12 text-center shadow-lg sm:px-12 sm:py-16">
-        <h1 className="mb-4 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+    <div className="max-w-4xl mx-auto p-6 text-center">
+      <div className="py-12 px-6 rounded-2xl bg-linear-to-r from-blue-600 to-indigo-700 text-white shadow-lg mb-8">
+        <h1 className="text-3xl md:text-4xl font-bold mb-4">
           Selamat Datang di PinjamLab
         </h1>
-
-        <p className="mx-auto max-w-2xl text-base loading-relaxed text-blue-50 sm:text-lg">
-          Aplikasi Peminjaman Ruanng dan Laboratorium Sekolah Secara Online
+        <p className="text-lg opacity-90 max-w-2xl mx-auto mb-6">
+          Sistem peminjaman ruang dan laboratorium sekolah secara online, cepat, dan transparan.
         </p>
-      </section>
-
-      {/* menu utama */}
-      <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
-        <Link
-          href="/ruang"
-          className="rounded-xl border border-slate-200 bg-white p-7 text-center shadow-sm transition-all duration-200 hover:translate-y-1 hover:border-blue-300 hover:shadow-lg"
-        >
-          <h2 className="mb-3 text-xl font-bold text-slate-800">
-            Daftar Ruang
-          </h2>
-          <p className="text-sm leading-relaxed text-slate-500">
-            Lihat ketersediaan ruangan dan lab aktif.
-          </p>
-        </Link>
-
-        <Link
-          href="/pinjam"
-          className="rounded-xl border border-slate-200 bg-white p-7 text-center shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg"
-        >
-          <h2 className="mb-3 text-xl font-bold text-slate-800">
-            Ajukan Peminjaman
-          </h2>
-          <p className="text-sm leading-relaxed text-slate-500">
-            Buat formulir pengajuan jadwal baru.
-          </p>
-        </Link>
-
-        <Link
-          href="/peminjaman"
-          className="rounded-xl border border-slate-200 bg-white p-7 text-center shadow-sm transition-all duration-200 hover:-translate-y-1 hover:border-blue-300 hover:shadow-lg"
-        >
-          <h2 className="mb-3 text-xl font-bold text-slate-800">
-            Jadwal Publik
-          </h2>
-          <p className="text-sm leading-relaxed text-slate-500">
-            Lihat jadwal kegiatan yang sudah disetujui.
-          </p>
-        </Link>
-      </div>
-
-      {/* Login Admin */}
-      <div className="mt-10 text-center">
-        <Link
-          href="/login"
-          className="inline-block rounded-lg border border-blue-200 bg-blue-50 px-6 py-3 text-sm font-semibold text-blue-700 transition-colors hover:bg-blue-100"
-        >
-          Login Admin Sarana-Prasarana →
-        </Link>
+        <div className="flex justify-center gap-4">
+          <Link
+            href="/ruang"
+            className="bg-white text-blue-600 font-semibold px-6 py-2.5 rounded-lg shadow hover:bg-gray-100 transition"
+          >
+            Lihat Daftar Ruang
+          </Link>
+          <Link
+            href="/cek"
+            className="bg-blue-800 text-white font-semibold px-6 py-2.5 rounded-lg shadow hover:bg-blue-900 transition"
+          >
+            Cek Status Peminjaman
+          </Link>
+        </div>
       </div>
     </div>
   );
