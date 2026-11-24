@@ -31,7 +31,6 @@ export default async function FormPinjam() {
       throw new Error("Jam operasional adalah pukul 07:00 - 17:00.");
     }
 
-    // Masukkan ke database menggunakan supabaseAdmin agar bypass RLS klien anonim
     const { error } = await supabaseAdmin.from("peminjaman").insert([
       {
         ruang_id,
