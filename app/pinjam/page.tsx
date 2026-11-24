@@ -1,6 +1,8 @@
 import { supabasePublic, supabaseAdmin } from "@/lib/supabase";
 import { redirect } from "next/navigation";
 
+export const instant = false;
+
 export default async function FormPinjam() {
   const { data: ruangList } = await supabasePublic
     .from("ruang")

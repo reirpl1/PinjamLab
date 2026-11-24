@@ -1,5 +1,7 @@
 import { supabasePublic } from "@/lib/supabase";
 
+export const instant = false;
+
 export default async function CekStatus({
   searchParams,
 }: {
@@ -49,9 +51,9 @@ export default async function CekStatus({
         </div>
         <button
           type="submit"
-          className="w-full bg-green-600 text-white p-2 rounded hover: bg-gree-700"
+          className="w-full bg-green-600 text-white p-2 rounded hover:bg-green-700"
         >
-          Cek Status[cite: 3]
+          Cek Status
         </button>
       </form>
 

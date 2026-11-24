@@ -1,6 +1,8 @@
 import { supabasePublic, supabaseAdmin } from "@/lib/supabase";
 import { revalidatePath } from "next/cache";
 
+export const instant = false;
+
 export default async function AdminPanel() {
   const { data: permohonanList } = await supabasePublic
     .from("peminjaman")
