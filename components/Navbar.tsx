@@ -8,6 +8,7 @@ const menu = [
   { href: "/pinjam", teks: "Ajukan Peminjaman" },
   { href: "/peminjaman", teks: "Jadwal Publik" },
   { href: "/cek", teks: "Cek Status" },
+  { href: "/admin", teks: "Admin" },
 ];
 
 export default function Navbar() {
