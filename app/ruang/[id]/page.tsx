@@ -20,7 +20,6 @@ export default async function DetailRuangan({
 
   if (errorRuang || !ruang) notFound();
 
-  // Ambil jadwal yang sudah disetujui untuk ruangan ini
   const { data: jadwalList, error: errorJadwal } = await supabasePublic
     .from("peminjaman")
     .select("tanggal, mulai, selesai, keperluan")
