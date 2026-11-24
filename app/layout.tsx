@@ -18,7 +18,7 @@ export default function RootLayout({
       <body className="min-h-screen bg-slate-50 text-slate-900">
         <Suspense
           fallback={
-            <header className="min-h-[62px] border-b border-blue-100 bg-blue-50" />
+            <header className="min-h-15.5 border-b border-blue-100 bg-blue-50" />
           }
         >
           <Navbar />
