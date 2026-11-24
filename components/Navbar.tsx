@@ -14,8 +14,8 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="border-t-4 border-blue-600 bg-gradient-to-r from-blue-50 via-white to-sky-50 shadow-sm">
-      <nav className="flex min-h-[62px] flex-wrap items-center gap-6 border-b border-blue-100 px-8 py-3">
+    <header className="border-t-4 border-blue-600 bg-linear-to-r from-blue-50 via-white to-sky-50 shadow-sm">
+      <nav className="flex min-h-15.5 flex-wrap items-center gap-6 border-b border-blue-100 px-8 py-3">
         {/* Logo */}
         <Link
           href="/"
@@ -35,7 +35,7 @@ export default function Navbar() {
               href={m.href}
               className={`relative py-2 text-sm transition-colors duration-200 ${
                 aktif
-                  ? "font-bold text-blue-700 after:absolute after:bottom-0 after:left-0 after:h-[3px] after:w-full after:rounded-full after:bg-blue-600"
+                  ? "font-bold text-blue-700 after:absolute after:bottom-0 after:left-0 after:h-0.75 after:w-full after:rounded-full after:bg-blue-600"
                   : "font-medium text-slate-600 hover:text-blue-600"
               }`}
             >
