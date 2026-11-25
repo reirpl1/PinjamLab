@@ -8,7 +8,8 @@ export default function Home() {
           Selamat Datang di PinjamLab
         </h1>
         <p className="text-lg opacity-90 max-w-2xl mx-auto mb-6">
-          Sistem peminjaman ruang dan laboratorium sekolah secara online, cepat, dan transparan.
+          Sistem peminjaman ruang dan laboratorium sekolah secara online, cepat,
+          dan transparan.
         </p>
         <div className="flex justify-center gap-4">
           <Link
@@ -24,6 +25,36 @@ export default function Home() {
             Cek Status Peminjaman
           </Link>
         </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-10">
+        <Link
+          href="/ruang"
+          className="border border-gray-300 rounded-xl p-6 shadow-sm hover: shadow-md transition bg-white"
+        >
+          <h2 className="text-xl font-bold mb-3">Daftar Ruang</h2>
+          <p className="text-gray-500">
+            Lihat ketersediaan ruangan dan lab aktif.
+          </p>
+        </Link>
+
+        <Link
+          href="/peminjaman"
+          className="border border-gray-300 rounded-xl p-6 shadow-sm hover: shadow-md transition bg-white"
+        >
+          <h2 className="text-xl font-bold mb-3">Ajukan Peminjaman</h2>
+          <p className="text-gray-500">Buat formulir pengajuan jadwal baru</p>
+        </Link>
+
+        <Link
+          href="/jadwal"
+          className="border border-gray-300 rounded-xl p-6 shadow-sm hover:shadow-md transition bg-white"
+        >
+          <h2 className="text-xl font-bold mb-3">Jadwal Publik</h2>
+          <p className="text-gray-500">
+            Lihat jadwal kegiatan yang sudah disetujui.
+          </p>
+        </Link>
       </div>
     </div>
   );
