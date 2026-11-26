@@ -6,7 +6,7 @@ export const instant = false;
 export default async function CekStatusPage({
   searchParams,
 }: {
-  searchParams: Promise<{ nama?: string; id?: string}>;
+  searchParams: Promise<{ nama?: string; id?: string }>;
 }) {
   await connection();
 
@@ -17,49 +17,50 @@ export default async function CekStatusPage({
   let hasilPencarian: any[] = [];
   let errorMsg = "";
 
+  // Ambil data ruang untuk mapping nama ruangan
   const { data: ruangList } = await supabaseAdmin
-  .from("ruang")
-  .select("id, nama");
+    .from("ruang")
+    .select("id, nama");
   const ruangMap = new Map(ruangList?.map((r) => [r.id, r.nama]) || []);
 
-  if (keywordNama || keywordId) {
-    let query = supabaseAdmin.from("peminjaman").select("*");
+  // Sesuai studi kasus: Cek status dengan NOMOR + NAMA PEMINJAM (keduanya harus diisi & cocok)
+  if (keywordNama && keywordId) {
+    const { data, error } = await supabaseAdmin
+      .from("peminjaman")
+      .select("*")
+      .eq("id", Number(keywordId))
+      .ilike("peminjam", keywordNama); // Pencarian ketat berdasarkan ID dan Nama
 
-    if (keywordId) {
-      query = query.eq("id", Number(keywordId));
-    }
-
-    if (keywordNama) {
-      query = query.ilike("peminjam", `%${keywordNama}%`);
-    }
-
-    const { data, error } = await query.order("dibuat", { ascending: false});
-
-    if (error)  {
+    if (error) {
       errorMsg = error.message;
     } else {
       hasilPencarian = data || [];
     }
+  } else if (keywordNama || keywordId) {
+    errorMsg =
+      "Mohon masukkan NOMOR ID Peminjaman dan NAMA PEMINJAM secara bersamaan untuk melakukan pengecekan.";
   }
 
   return (
-    <div className  = "mx-auto max-w-4xl p-6">
+    <div className="mx-auto max-w-4xl p-6">
       <h1 className="mb-2 text-2xl font-bold text-slate-950">
         Cek Status Peminjaman
       </h1>
       <p className="mb-6 text-sm text-slate-500">
-        Masukkan nama dan ID peminjam untuk melacak status penggajuan ruang atau laboratorium secara akurat.
+        Masukkan ID (Nomor) dan Nama Peminjam secara bersamaan untuk melacak
+        status pengajuan secara akurat.
       </p>
 
       <form
-      method="GET"
-      action="/cek"
-      className="mb-8 flex flex-col gap-3 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm: flex-row"
+        method="GET"
+        action="/cek"
+        className="mb-8 flex flex-col gap-3 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:flex-row"
       >
-      <input
+        <input
           type="text"
           name="nama"
           defaultValue={keywordNama}
+          required
           placeholder="Nama peminjam (contoh: Nadia)..."
           className="flex-1 rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none"
         />
@@ -67,24 +68,25 @@ export default async function CekStatusPage({
           type="number"
           name="id"
           defaultValue={keywordId}
+          required
           placeholder="ID Peminjaman (contoh: 7)..."
-          className="w-full sm:w-48 rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none"
+          className="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:border-blue-500 focus:outline-none sm:w-48"
         />
         <button
           type="submit"
           className="rounded-lg bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white transition hover:bg-blue-700"
         >
-          Cari Status
+          Cek Status
         </button>
       </form>
 
       {errorMsg && (
-        <p className="mb-4 text-sm text-red-500">
-          Terjadi kesalahan: {errorMsg}
-        </p>
+        <div className="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800 shadow-sm">
+          {errorMsg}
+        </div>
       )}
 
-      {(keywordNama || keywordId) && (
+      {keywordNama && keywordId && (
         <div>
           <p className="mb-4 text-sm text-slate-600">
             Menampilkan hasil pencarian ({hasilPencarian.length} ditemukan)
@@ -92,7 +94,8 @@ export default async function CekStatusPage({
 
           {hasilPencarian.length === 0 ? (
             <div className="rounded-xl border border-slate-200 bg-white p-6 text-center text-sm text-slate-500 shadow-sm">
-              Data peminjaman tidak ditemukan dengan kriteria tersebut.
+              Data peminjaman tidak ditemukan. Pastikan kombinasi ID dan Nama
+              Peminjam sudah benar-benar cocok.
             </div>
           ) : (
             <div className="grid gap-4 sm:grid-cols-2">
@@ -114,7 +117,7 @@ export default async function CekStatusPage({
                       >
                         {item.status}
                       </span>
-                      <span className="text-xs font-semibold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">
+                      <span className="rounded bg-blue-50 px-2 py-0.5 text-xs font-semibold text-blue-600">
                         ID #{item.id}
                       </span>
                     </div>
