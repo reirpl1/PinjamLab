@@ -1,6 +1,7 @@
 import { supabasePublic, supabaseAdmin } from "@/lib/supabase";
 import { revalidatePath } from "next/cache";
 import DaftarPermohonan from "@/components/DaftarPermohonan";
+import Link from "next/link";
 
 export const instant = false;
 
@@ -56,8 +57,8 @@ export default async function AdminPanel() {
   }
 
   return (
-    <div className="mx-auto max-w-5xl">
-      <DaftarPermohonan 
+    <div className="mx-auto max-w-5xl px-4 py-6">
+      <DaftarPermohonan
         data={permohonanList ?? []}
         updateStatus={updateStatus}
       />
