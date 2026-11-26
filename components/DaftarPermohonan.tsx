@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@supabase/supabase-js";
+import Link from "next/link";
 
 type Permohonan = {
   id: number;
@@ -170,14 +171,23 @@ export default function DaftarPermohonan({ data, updateStatus }: Props) {
               </p>
             </div>
 
-            <div className="w-full sm:w-72">
-              <input
-                type="text"
-                value={cari}
-                onChange={(e) => setCari(e.target.value)}
-                placeholder="Cari peminjam / ruangan..."
-                className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-800 outline-none transition focus:border-slate-500"
-              />
+            <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center">
+              <Link
+                href="/admin/ruang"
+                className="inline-flex items-center justify-center rounded-lg bg-blue-600 px-4 py-2 text-xs font-semibold text-white shadow-sm transition hover:bg-blue-700"
+              >
+                Kelola Ruangan
+              </Link>
+
+              <div className="w-full sm:w-72">
+                <input
+                  type="text"
+                  value={cari}
+                  onChange={(e) => setCari(e.target.value)}
+                  placeholder="Cari peminjam / ruangan..."
+                  className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-xs text-slate-800 outline-none transition focus:border-slate-500"
+                />
+              </div>
             </div>
           </div>
 
